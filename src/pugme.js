@@ -5,7 +5,7 @@
 //   None
 //
 // Commands:
-//   hubot pug me - receives a pug
+//   hubot pug me - gets a pug
 //   hubot pug bomb N - gets N pugs
 //
 
