@@ -10,15 +10,19 @@
 //
 
 module.exports = function(robot) {
+    const nFetch = require('node-fetch');
+
     const SERVICE_URL = "http://pugme.herokuapp.com";
     const PUGS_LIMIT = process.env.PUGS_LIMIT || 5;
 
-    robot.respond(/pug me/i, msg =>
-        msg.http(`${SERVICE_URL}/random`)
-            .get()((err, res, body) => msg.send(JSON.parse(body).pug))
-    );
+    robot.respond(/pug me/i, async (msg) => {
+        await nFetch(`${SERVICE_URL}/random`)
+            .then(res => res.json())
+            .then(json => msg.send(json.pug))
+            .catch(err => robot.logger.error(`Failed to request a pug: ${err}`));
+    });
 
-    robot.respond(/pug bomb( (\d+))?/i, function(msg) {
+    robot.respond(/pug bomb( (\d+))?/i, async (msg) => {
         const count = msg.match[2] || 5;
 
         if (count > PUGS_LIMIT) {
@@ -26,13 +30,17 @@ module.exports = function(robot) {
             return;
         }
 
-        return msg.http(`${SERVICE_URL}/bomb?count=${count}`)
-            .get()((err, res, body) => Array.from(JSON.parse(body).pugs).map((pug) => msg.send(pug)));
+        await nFetch(`${SERVICE_URL}/bomb?count=${count}`)
+            .then(res => res.json())
+            .then(json => Array.from(json.pugs).map((pug) => msg.send(pug)))
+            .catch(err => robot.logger.error(`Failed to request ${count} pugs: ${err}`));
     });
 
-    return robot.respond(/how many pugs are there/i, msg =>
-        msg.http(`${SERVICE_URL}/count`)
-            .get()((err, res, body) => msg.send(`There are ${JSON.parse(body).pug_count} pugs.`))
-    );
+    return robot.respond(/how many pugs are there/i, async (msg) => {
+        await nFetch(`${SERVICE_URL}/count`)
+            .then(res => res.json())
+            .then(json => msg.send(`There are ${json.pug_count} pugs.`))
+            .catch(err => robot.logger.error(`Failed to request the number of pugs: ${err}`));
+    });
 };
 
