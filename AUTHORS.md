@@ -1,0 +1,1 @@
+The original idea of pugme belongs to [Josh Nichols](https://github.com/technicalpickles). The current implementation of the script is written and maintained by [Evgeny Golyshev](https://github.com/eugulixes).
