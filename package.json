@@ -14,5 +14,8 @@
   },
   "bugs": {
     "url": "https://github.com/tolstoyevsky/hubot-pugme/issues"
+  },
+  "dependencies": {
+    "node-fetch": "^2.1.2"
   }
 }
