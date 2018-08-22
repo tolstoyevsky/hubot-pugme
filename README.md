@@ -41,5 +41,5 @@ See [AUTHORS](AUTHORS.md).
 
 ## Licensing
 
-hubot-vote-or-die is available under the [Apache License, Version 2.0](LICENSE).
+hubot-pugme is available under the [Apache License, Version 2.0](LICENSE).
 
