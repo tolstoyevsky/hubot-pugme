@@ -13,7 +13,7 @@ module.exports = function(robot) {
     const nFetch = require('node-fetch');
 
     const SERVICE_URL = "http://pugme.herokuapp.com";
-    const PUGS_LIMIT = process.env.PUGS_LIMIT || 5;
+    const PUGS_LIMIT = parseInt(process.env.PUGS_LIMIT, 10) || 5;
 
     robot.respond(/pug me/i, async (msg) => {
         await nFetch(`${SERVICE_URL}/random`)
