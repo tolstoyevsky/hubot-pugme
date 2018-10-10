@@ -12,13 +12,14 @@
 module.exports = function (robot) {
   const nFetch = require('node-fetch')
 
-  const SERVICE_URL = 'http://pugme.herokuapp.com'
+  const SERVICE_URL = 'https://dog.ceo/api'
+
   const PUGS_LIMIT = parseInt(process.env.PUGS_LIMIT, 10) || 5
 
   robot.respond(/pug me/i, async (msg) => {
-    await nFetch(`${SERVICE_URL}/random`)
+    await nFetch(`${SERVICE_URL}/breed/pug/images/random`)
       .then(res => res.json())
-      .then(json => msg.send(json.pug))
+      .then(json => msg.send(json.message))
       .catch(err => robot.logger.error(`Failed to request a pug: ${err}`))
   })
 
@@ -30,16 +31,9 @@ module.exports = function (robot) {
       return
     }
 
-    await nFetch(`${SERVICE_URL}/bomb?count=${count}`)
+    await nFetch(`${SERVICE_URL}/breed/pug/images/random/${count}`)
       .then(res => res.json())
-      .then(json => Array.from(json.pugs).map((pug) => msg.send(pug)))
+      .then(json => Array.from(json.message).map((pug) => msg.send(pug)))
       .catch(err => robot.logger.error(`Failed to request ${count} pugs: ${err}`))
-  })
-
-  return robot.respond(/how many pugs are there/i, async (msg) => {
-    await nFetch(`${SERVICE_URL}/count`)
-      .then(res => res.json())
-      .then(json => msg.send(`There are ${json.pug_count} pugs.`))
-      .catch(err => robot.logger.error(`Failed to request the number of pugs: ${err}`))
   })
 }
