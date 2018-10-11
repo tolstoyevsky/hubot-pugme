@@ -14,6 +14,7 @@ module.exports = function (robot) {
 
   const SERVICE_URL = 'http://pugme.herokuapp.com'
   const THE_CAT_API = 'https://api.thecatapi.com'
+  const RANDOM_FOX = 'https://randomfox.ca'
   const PUGS_LIMIT = parseInt(process.env.PUGS_LIMIT, 10) || 5
 
   robot.respond(/pug me/i, async (msg) => {
@@ -27,6 +28,13 @@ module.exports = function (robot) {
     await nFetch(`${THE_CAT_API}/v1/images/search`)
       .then(res => res.json())
       .then(json => msg.send(json[0].url))
+      .catch(err => robot.logger.error(`Failed to request a cat: ${err}`))
+  })
+
+  robot.respond(/fox me/i, async (msg) => {
+    await nFetch(`${RANDOM_FOX}/floof/`)
+      .then(res => res.json())
+      .then(json => msg.send(json.image))
       .catch(err => robot.logger.error(`Failed to request a cat: ${err}`))
   })
 
