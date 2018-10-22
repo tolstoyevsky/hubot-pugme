@@ -7,6 +7,8 @@
 // Commands:
 //   hubot pug me - gets a pug
 //   hubot pug bomb N - gets N pugs
+//   hubot cat me - gets a cat
+//   hubot cat bomb N - gets N cats
 //
 
 module.exports = function (robot) {
@@ -15,7 +17,7 @@ module.exports = function (robot) {
   const PUGME_SERVICE = 'https://dog.ceo/api'
   const CATME_SERVICE = 'https://aws.random.cat/meow'
 
-  const CUTIES_LIMIT = parseInt(process.env.CUTIES_LIMIT, 10) || 5
+  const CUTES_LIMIT = parseInt(process.env.CUTES_LIMIT, 10) || 5
 
   robot.respond(/pug me/i, async (msg) => {
     await nFetch(`${PUGME_SERVICE}/breed/pug/images/random`)
@@ -34,8 +36,8 @@ module.exports = function (robot) {
   robot.respond(/pug bomb( (\d+))?/i, async (msg) => {
     const count = msg.match[2] || 5
 
-    if (count > CUTIES_LIMIT) {
-      msg.send(`The maximum number of pugs is limited to ${CUTIES_LIMIT}`)
+    if (count > CUTES_LIMIT) {
+      msg.send(`The maximum number of pugs is limited to ${CUTES_LIMIT}`)
       return
     }
 
@@ -48,15 +50,16 @@ module.exports = function (robot) {
   robot.respond(/cat bomb( (\d+))?/i, async (msg) => {
     const count = msg.match[2] || 5
 
-    if (count > CUTIES_LIMIT) {
-      msg.send(`The maximum number of cats is limited to ${CUTIES_LIMIT}`)
+    if (count > CUTES_LIMIT) {
+      msg.send(`The maximum number of cats is limited to ${CUTES_LIMIT}`)
       return
     }
 
-    for(let i = 0; i < count; i++){
+    for (let i = 0; i < count; i++) {
       await nFetch(`${CATME_SERVICE}`)
-      .then(res => res.json())
-      .then(json => msg.send(json.file))
-      .catch(err => robot.logger.error(`Failed to request a cat: ${err}`))}
+        .then(res => res.json())
+        .then(json => msg.send(json.file))
+        .catch(err => robot.logger.error(`Failed to request a cat: ${err}`))
+    }
   })
 }
