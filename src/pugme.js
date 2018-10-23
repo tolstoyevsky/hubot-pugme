@@ -5,8 +5,10 @@
 //   None
 //
 // Commands:
+//   begin group Pugme
 //   hubot pug me - gets a pug
 //   hubot pug bomb N - gets N pugs
+//   end group
 //
 
 module.exports = function(robot) {
