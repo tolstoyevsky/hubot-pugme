@@ -1,26 +1,27 @@
-Hubot script for showing random pictures with pugs.
+Hubot script for showing random pictures with cuties.
 
-The main goal of the project is to resurrect the original [pugme](https://github.com/hubot-scripts/hubot-pugme) which is written in CoffeScript. Thus, the first version of the script was based on the original code of pugme converted into JavaScript (with slight changes) using [decaffeinate](https://github.com/decaffeinate/decaffeinate). Then, a couple of enhancements were added to the script:
-* the `PUGS_LIMIT` environment variable to limit the number of pugs when invoking `hubot pug bomb N`;
-* a possibility to request pugs asynchronously. 
+The main goal of the project is to resurrect the original [pugme](https://github.com/hubot-scripts/hubot-pugme) which is written in CoffeScript. Thus, the first version of the script was based on the original code of pugme converted into JavaScript (with slight changes) using [decaffeinate](https://github.com/decaffeinate/decaffeinate) and has been expanded for other cuties. Then, a couple of enhancements were added to the script:
+* the `CUTES_LIMIT`(`PUGS_LIMIT` in old version) environment variable to limit the number of cuties when invoking `hubot {cute_name} bomb N`;
+* `cat me`(and similar `cat bomb`) commands for showing random picture with cats;
+* a possibility to request cuties asynchronously.
 
 ## Installation
 
 In hubot project repo, run:
 
-`npm install git+https://github.com/tolstoyevsky/hubot-pugme --save`
+`npm install git+https://github.com/tolstoyevsky/hubot-cuteme --save`
 
-Then add **hubot-pugme** to your `external-scripts.json`:
+Then add **hubot-cuteme** to your `external-scripts.json`:
 
 ```json
 [
-  "hubot-pugme"
+  "hubot-cuteme"
 ]
 ```
 
 ## Configuration
 
-The script supports the only configuration parameter which is `PUGS_LIMIT`. It allows the administrators to limit the maximum number of pugs. By default, the parameter is equal to **5**.
+The script supports the only configuration parameter which is `CUTES_LIMIT`. It allows the administrators to limit the maximum number of cuties. By default, the parameter is equal to **5**.
 
 ## Sample Interaction
 
@@ -33,6 +34,14 @@ hubot>> http://25.media.tumblr.com/tumblr_lk7v8zCcIn1qaa50yo1_500.jpg
 hubot>> http://26.media.tumblr.com/tumblr_ltee8lg9wd1qb08qmo1_500.jpg
 hubot>> http://26.media.tumblr.com/tumblr_ll7aoxHGfW1qb08qmo1_500.jpg
 hubot>> http://28.media.tumblr.com/tumblr_lk8iieigtQ1qzj3syo1_500.jpg
+user>> hubot cat me
+hubot>> https://purr.objects-us-west-1.dream.io/i/4o0mT.jpg
+user>> hubot cat bomb
+hubot>> https://purr.objects-us-west-1.dream.io/i/OIlLAN4.jpg
+hubot>> https://purr.objects-us-west-1.dream.io/i/20160826_180141.jpg
+hubot>> https://purr.objects-us-west-1.dream.io/i/Bh0nZ.jpg
+hubot>> https://purr.objects-us-west-1.dream.io/i/WbaUU.jpg
+hubot>> https://purr.objects-us-west-1.dream.io/i/065_-_AhrGPRl.gif
 ```
 
 ## Authors
